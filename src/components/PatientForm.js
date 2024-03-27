@@ -25,6 +25,7 @@ const PatientForm = () => {
 
   const handleChange = (e) => {
     setPatientData({ ...patientData, [e.target.name]: e.target.value });
+    validateField(e.target.name, e.target.value);
   };
 
   const handleDateChange = (field, value) => {
@@ -57,6 +58,71 @@ const PatientForm = () => {
     }
   };
 
+  const generatePatientId = async () => {
+    try {
+      const response = await axios.get('http://localhost:5000/api/patients');
+      const patients = response.data;
+      const maxId = patients.reduce((max, patient) => {
+        const id = parseInt(patient.patientId);
+        return id > max ? id : max;
+      }, 0);
+      const nextId = maxId + 1;
+      setPatientData({ ...patientData, patientId: nextId.toString() });
+    } catch (error) {
+      console.error('Error generating patient ID:', error);
+    }
+  };
+
+  const [validationErrors, setValidationErrors] = useState({
+    patientName: '',
+    phoneNumber: '',
+    physicianName: '',
+    physicianPhoneNumber: '',
+    age: '',
+    location: '',
+    address: '',
+    prescription: '',
+    dose: '',
+    physicianId: '',
+    bill: '',
+  });
+
+  const validateField = (fieldName, value) => {
+    let errorMessage = '';
+
+    switch (fieldName) {
+      case 'patientName':
+        if (!/^[a-zA-Z ]+$/.test(value)) {
+          errorMessage = 'Name should only contain alphabets';
+        }
+        break;
+      case 'phoneNumber':
+        if (!/^[0-9+()\\-\\s]+$/.test(value)) {
+          errorMessage = 'Phone number should only contain numbers, +, -, or parentheses';
+        }
+        break;
+      case 'physicianPhoneNumber':
+        if (!/^[0-9+()\\-\\s]+$/.test(value)) {
+          errorMessage = 'Phone number should only contain numbers, +, -, or parentheses';
+        }
+        break;
+      case 'physicianName':
+        if (!/^[a-zA-Z ]+$/.test(value)) {
+          errorMessage = 'Name should only contain alphabets';
+        }
+        break;
+      case 'age':
+        if (!/^[0-9]+(\.[0-9]+)?$/.test(value) || parseFloat(value) <= 0) {
+          errorMessage = 'Age should be a positive number';
+        }
+        break;
+      default:
+        break;
+    }
+
+    setValidationErrors({ ...validationErrors, [fieldName]: errorMessage });
+  };
+
   return (
     <form onSubmit={handleSubmit}>
       <LocalizationProvider dateAdapter={AdapterDateFns}>
@@ -65,13 +131,22 @@ const PatientForm = () => {
             <Typography variant="h6">Patient Details</Typography>
           </Grid>
           <Grid item xs={12}>
-            <TextField
-              label="Patient ID"
-              name="patientId"
-              value={patientData.patientId}
-              onChange={handleChange}
-              fullWidth
-            />
+            <Grid container spacing={1} alignItems="center">
+              <Grid item xs={10}>
+                <TextField
+                  label="Patient ID"
+                  name="patientId"
+                  value={patientData.patientId}
+                  onChange={handleChange}
+                  fullWidth
+                />
+              </Grid>
+              <Grid item xs={2}>
+                <Button variant="contained" onClick={generatePatientId}>
+                  Generate ID
+                </Button>
+              </Grid>
+            </Grid>
           </Grid>
           <Grid item xs={12}>
             <TextField
@@ -80,6 +155,8 @@ const PatientForm = () => {
               value={patientData.patientName}
               onChange={handleChange}
               fullWidth
+              error={Boolean(validationErrors.patientName)}
+              helperText={validationErrors.patientName}
             />
           </Grid>
           <Grid item xs={12}>
@@ -107,6 +184,8 @@ const PatientForm = () => {
               value={patientData.phoneNumber}
               onChange={handleChange}
               fullWidth
+              error={Boolean(validationErrors.phoneNumber)}
+              helperText={validationErrors.phoneNumber}
             />
           </Grid>
           <Grid item xs={12}>
@@ -184,6 +263,8 @@ const PatientForm = () => {
               value={patientData.physicianName}
               onChange={handleChange}
               fullWidth
+              error={Boolean(validationErrors.physicianName)}
+              helperText={validationErrors.physicianName}
             />
           </Grid>
           <Grid item xs={12}>
@@ -193,6 +274,8 @@ const PatientForm = () => {
               value={patientData.physicianPhoneNumber}
               onChange={handleChange}
               fullWidth
+              error={Boolean(validationErrors.physicianPhoneNumber)}
+              helperText={validationErrors.physicianPhoneNumber}
             />
           </Grid>
           <Grid item xs={12}>

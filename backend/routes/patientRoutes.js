@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const Patient = require('../models/Patient');
 
+// POST
 // Create a new patient
 router.post('/', async (req, res) => {
   try {
@@ -14,6 +15,16 @@ router.post('/', async (req, res) => {
   }
 });
 
+// GET
+router.get('/', async (req, res) => {
+  try {
+    const patients = await Patient.find();
+    res.json(patients);
+  } catch (error) {
+    console.error('Error retrieving patients:', error);
+    res.status(500).json({ error: 'Server error' });
+  }
+});
 // Search patients
 router.get('/search', async (req, res) => {
   try {
