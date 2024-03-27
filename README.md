@@ -1,5 +1,7 @@
 # Patient Management App
 
+![alt text](image.png)
+
 The Patient Management App is a web application that allows healthcare providers to manage patient information, including personal details, prescriptions, and physician information. It provides features for adding new patients and searching for existing patients.
 
 ## Features
