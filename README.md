@@ -1,70 +1,81 @@
-# Getting Started with Create React App
+# Patient Management App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+The Patient Management App is a web application that allows healthcare providers to manage patient information, including personal details, prescriptions, and physician information. It provides features for adding new patients and searching for existing patients.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+- Add new patients with detailed information
+- Search for patients by name or phone number
+- Display patient details, prescription information, and physician information
+- Responsive and user-friendly interface
 
-### `npm start`
+## Technologies Used
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- Frontend:
+  - React (create-react-app)
+  - Material-UI
+  - Axios
+- Backend:
+  - Node.js
+  - MongoDB Atlas
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Installation
 
-### `npm test`
+Clone the repository:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+`git clone https://github.com/your-username/patient-management-app.git`
 
-### `npm run build`
+Navigate to the project directory:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+`cd patient-management-app`
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Install the dependencies:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+`npm install`
 
-### `npm run eject`
+Set up the backend server:
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- Create a MongoDB Atlas account and set up a new cluster
+- Obtain the MongoDB connection string
+- Create a `.env` file in the `backend` directory and add the following environment variable:
+  `MONGO_URI=your-mongodb-connection-string`
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Set up the frontend:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+- Create a `.env` file in the root directory and add the following environment variable:
+  `  REACT_APP_BACKEND_URL=http://localhost:5000`
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## Running the App
 
-## Learn More
+Start the backend server:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```
+cd backend
+node server.js
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Start the frontend development server:
 
-### Code Splitting
+```
+cd ..
+npm start
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Open your browser and visit `http://localhost:3000` to access the app.
 
-### Analyzing the Bundle Size
+## Deployment
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+The frontend of the app can be deployed on Netlify, while the backend server needs to be hosted separately. To deploy the app:
 
-### Making a Progressive Web App
+1. Push the frontend code to a GitHub repository.
+2. Connect the repository to Netlify and configure the deployment settings.
+3. Deploy the backend server to a hosting platform like Heroku or AWS.
+4. Update the frontend code to use the hosted backend server URL.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## Contributing
 
-### Advanced Configuration
+Contributions are welcome! If you find any bugs or have suggestions for improvements, please open an issue or submit a pull request.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## License
 
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+This project is licensed under the MIT License.
